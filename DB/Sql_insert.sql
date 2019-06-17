@@ -225,5 +225,12 @@ as
 			end
 		update Book set Book_stock-= @Buy_num where @Book_id = Book_id
 		exec add_Order_detail @Orderform_id,@Buy_num,@Book_id,@money--添加订单明细
-		--exec add_Orderform  @Orderform_id, getdate(), @Customer_id, null, @Buy_num
+		if((select Orderform.Orderform_id from Orderform where Orderform_id=@Orderform_id)=@Orderform_id)
+			begin
+				update Orderform set Supplier_total+=@Buy_num where Orderform_id=@Orderform_id--更新该条订单
+			end
+		else
+			begin
+			    insert into Orderform values(@Orderform_id, @time,@Customer_id,null,@Buy_num)--创建一条新订单
+			end
 	end
