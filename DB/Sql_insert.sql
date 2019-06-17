@@ -139,7 +139,91 @@ as
 	exec add_Order_detail @Orderform_id, @Book_stock, @Book_id, @Pay_total
 	end
 
+
 /*----------------------------------------------------------------------------
-函数 输入图书号，返回距离现在有几天
+函数 输入进货时间，返回距离现在有几天
 
 -------------------------*/
+create function diff_date(@date datetime)
+returns int
+begin
+	return datediff(day,@date,getdate())
+end
+
+----------------------------------------
+/*会员判断函数   输入顾客号，判断是否为会员*/
+create function vip_judge(@customer_id varchar)
+returns int
+begin
+	declare @flag int
+	select @flag = Customer_vip from Customer where @customer_id = Customer_id
+	if ( @flag = 1)
+	return 1
+	return 0;
+end
+--------------------------------------------------------
+
+/*判断一本书在日期限制下是否打折  特价书
+输入图书号、限制天数   返回是否打折（0/1）
+*/
+
+create function discount(@book_id varchar(20))
+returns int
+begin
+	declare @time DATETIME
+	select @time = Book_storage_time
+	from Book
+	where @book_id = Book_id
+	if @time = null
+	return 0
+	if((dbo.diff_date(@time) - 30 ) > 0 )
+	
+	return 1
+	
+	return 0
+end
+/*----------------------------------------------
+卖书存储过程
+---------------------------------------*/
+create proc sell_book
+	@Orderform_id varchar(20),--订单号
+	@Book_id varchar(20),--图书号
+	@Customer_id varchar(20),--顾客编号
+	@Buy_num int	--购买数量
+as
+	begin
+		declare @time datetime--图书的入库时间
+		declare @flag int --是否是特价书
+		declare @vip int --是否是会员
+		declare @vip_money int --会员卡金额
+		declare @book_price float --图书的价钱
+		declare @money float --实际交易额 
+		select @time = Book_storage_time, @book_price = Book_out_price from Book where @Book_id = Book_id--查询图书的入库时间、图书价格
+		set @flag = dbo.discount(@time)
+		if(@flag = 1 )--是否特价
+			begin
+			set @money = @Buy_num * @book_price* 0.7--特价书打7折
+				set @vip = dbo.discount(@Customer_id)
+				if(@vip = 1)--是否会员
+					begin
+						update Customer set Customer_vip_money += @money where Customer_id = @Customer_id--更新会员卡的金额
+					end
+				
+			end
+		else
+			begin 
+				set @money = @Buy_num * @book_price
+				set @vip = dbo.discount(@Customer_id)
+				
+				select @vip_money = Customer_vip_money from Customer where Customer_id = @Customer_id
+				if( @vip = 1 and @vip_money > 500 )
+					begin
+						set @money = @money * 0.8 -- 会员8折
+						update Customer set Customer_vip_money = Customer_vip_money + @money where Customer_id = @Customer_id
+					end	
+					
+			end
+		update Book set Book_stock-= @Buy_num where @Book_id = Book_id
+		exec add_Order_detail @Orderform_id,@Buy_num,@Book_id,@money--添加订单明细
+		--exec add_Orderform  @Orderform_id, getdate(), @Customer_id, null, @Buy_num
+	end
