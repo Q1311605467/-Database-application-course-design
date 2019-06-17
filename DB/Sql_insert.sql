@@ -91,8 +91,18 @@ as
 		select @Book_price = Book_out_price  from Book where @Book_id = Book_id
 		select @Supplier_id = Orderform.Supplier_id from Book,Order_detail,Orderform where Book.Book_id = Order_detail.Book_id and Order_detail.Orderform_id = Orderform.Orderform_id --查询供应商号
 		set @Pay_total = @Book_price * @Book_num --计算总金额
-		--select   from Book where @Book_id = Book_id
 		set @time = getdate()--获取当前时间
+		if((select Orderform_id from Orderform)=@Orderform_id)
+			begin
+				update Orderform set Supplier_total+=@Book_num where Orderform_id=@Orderform_id--更新该条订单
+			end
+		else
+			begin
+				insert into Orderform values(@Orderform_id, @time,null,@Supplier_id,@Book_num)--创建一条新订单
+			end
+			update Book set Book_storage_time =@time where  Book_id= @Book_id--更新入库时间
+		--select   from Book where @Book_id = Book_id
+		
 		insert into Order_detail values(@Orderform_id, @Book_num, @Book_id, @Pay_total)--更新订单明细表
 		update Book set Book_stock += @Book_num where @Book_id = Book_id  --更新图书库
 		insert into Orderform values(@Orderform_id, @time,null,@Supplier_id,@Book_num)--更新订单
@@ -106,6 +116,7 @@ as
  select * from Orderform
  ROLLBACK
  */ 
+ 
  
  create proc Supply_NonExistentBook--供应不存在的书存储过程
 	@Orderform_id varchar(20),--订单号
@@ -127,4 +138,8 @@ as
 	exec add_Orderform  @Orderform_id, @Book_storage_time, null, @Supplier_id, @Book_stock
 	exec add_Order_detail @Orderform_id, @Book_stock, @Book_id, @Pay_total
 	end
- 
+
+/*----------------------------------------------------------------------------
+函数 输入图书号，返回距离现在有几天
+
+-------------------------*/
