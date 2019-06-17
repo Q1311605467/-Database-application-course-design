@@ -1,4 +1,5 @@
 package Frame;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -135,14 +136,14 @@ public class Chaxun extends JFrame {
 			}
 		});
 		button_9.setFont(new Font("宋体", Font.BOLD, 20));
-		button_9.setBounds(474, 116, 113, 27);
+		button_9.setBounds(587, 116, 113, 27);
 		contentPane.add(button_9);
 
 
 		panel_1.setVisible(true);
 
 		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(0, 101, 460, 57);
+		panel_3.setBounds(0, 101, 532, 57);
 		contentPane.add(panel_3);
 		panel_3.setLayout(new CardLayout(0, 0));
 		panel_3.add(panel_1);
@@ -159,7 +160,7 @@ public class Chaxun extends JFrame {
 		        {
 		            Class.forName(jdbcDriver);//加载数据库驱动
 		            String user="sa";//数据库用户名
-		            String password="123456";//数据库密码
+		            String password="zxc134679852";//数据库密码
 		            Connection connection=DriverManager.getConnection(connectDB,user,password);//建立数据库连接，获得连接对象
 		               int count = 0;
 		               Statement statement=connection.createStatement();//创建一个Statement对象 
@@ -222,7 +223,7 @@ public class Chaxun extends JFrame {
 		        {
 		            Class.forName(jdbcDriver);//加载数据库驱动
 		            String user="sa";//数据库用户名
-		            String password="123456";//数据库密码
+		            String password="zxc134679852";//数据库密码
 		            Connection connection=DriverManager.getConnection(connectDB,user,password);//建立数据库连接，获得连接对象
 		            int count = 0;
 		              Statement statement=connection.createStatement();//创建一个Statement对象 
@@ -282,7 +283,7 @@ public class Chaxun extends JFrame {
 		        {
 		            Class.forName(jdbcDriver);//加载数据库驱动
 		            String user="sa";//数据库用户名
-		            String password="123456";//数据库密码
+		            String password="zxc134679852";//数据库密码
 		            Connection connection=DriverManager.getConnection(connectDB,user,password);//建立数据库连接，获得连接对象
 		            int count = 0;
 		              Statement statement=connection.createStatement();//创建一个Statement对象 
@@ -327,6 +328,53 @@ public class Chaxun extends JFrame {
 		});
 		button_5.setBounds(282, 14, 113, 27);
 		panel_4.add(button_5);
+		
+		JButton button_7 = new JButton("\u660E\u7EC6\u67E5\u770B");
+		button_7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				String jdbcDriver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+				String connectDB = "jdbc:sqlserver://127.0.0.1:1433;DatabaseName=BRMSDB";
+
+				try {
+					Class.forName(jdbcDriver);// 加载数据库驱动
+					String user = "sa";// 数据库用户名
+					String password = "zxc134679852";// 数据库密码
+					Connection connection = DriverManager.getConnection(connectDB, user, password);// 建立数据库连接，获得连接对象
+					
+				int count = 0;
+				Statement statement = connection.createStatement();
+				ResultSet rs = statement.executeQuery("SELECT * FROM Order_detail where Orderform_id='"+textField_2.getText()+"'");
+				
+				while (rs.next()) {
+					count++;
+				}
+				//num+=count;
+				Object[][] infomation = new Object[count][4];
+				count = 0;
+				rs = statement.executeQuery("SELECT * FROM Order_detail where Orderform_id='"+textField_2.getText()+"'");
+				while (rs.next()) {
+					
+					infomation[count][0] = String.valueOf(rs.getString("Orderform_id"));
+					infomation[count][1] = String.valueOf(rs.getString("Book_num"));
+					infomation[count][2] = String.valueOf(rs.getString("Book_id"));
+					infomation[count][3] = String.valueOf(rs.getString("Pay_total"));
+					count++;
+
+				}
+				String[] title = { "订单号", "数量", "图书号","小计" };
+				table = new JTable(infomation, title);
+				table.setBounds(41, 122, 843, 372);
+				scrollPane.setViewportView(table);/// 加表格
+			} 
+				catch (Exception e1) {
+				System.out.println("错误");
+				}
+			}
+		});
+		
+		button_7.setBounds(405, 14, 113, 27);
+		panel_4.add(button_7);
 		panel_3.add(panel_5);
 		
 		JButton button_6 = new JButton("\u67E5\u8BE2");
@@ -342,7 +390,7 @@ public class Chaxun extends JFrame {
 		        {
 		            Class.forName(jdbcDriver);//加载数据库驱动
 		            String user="sa";//数据库用户名
-		            String password="123456";//数据库密码
+		            String password="zxc134679852";//数据库密码
 		            Connection connection=DriverManager.getConnection(connectDB,user,password);//建立数据库连接，获得连接对象
 		            int count = 0;
 		              Statement statement=connection.createStatement();//创建一个Statement对象 
