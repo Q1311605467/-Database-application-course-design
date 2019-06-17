@@ -51,7 +51,7 @@ create table Orderform--订单表
 
 create table Order_detail--订单明细表
 (
-	Orderform_id varchar(20) primary key,--订单编号
+	Orderform_id varchar(20),--订单编号
 	Book_num int ,--图书数量
 	Book_id varchar(20),--图书号
 	Pay_total float--小计
@@ -83,5 +83,3 @@ create table Customer--顾客表
 	Customer_vip_money float,--会员卡金额
 	Customer_tel varchar(20) --顾客联系电话
 ) 
---drop table Sell_record
-
