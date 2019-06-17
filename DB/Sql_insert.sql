@@ -195,7 +195,7 @@ as
 		declare @time datetime--图书的入库时间
 		declare @flag int --是否是特价书
 		declare @vip int --是否是会员
-		declare @vip_money int --会员卡金额
+		declare @vip_money float --会员卡金额
 		declare @book_price float --图书的价钱
 		declare @money float --实际交易额 
 		select @time = Book_storage_time, @book_price = Book_out_price from Book where @Book_id = Book_id--查询图书的入库时间、图书价格
