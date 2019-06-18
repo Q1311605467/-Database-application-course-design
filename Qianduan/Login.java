@@ -82,7 +82,7 @@ public class Login  {
 			public void actionPerformed(ActionEvent arg0) {
 				String name = textField.getText();
 				String password = passwordField.getText();
-				if("sa".equals(name)&&"123456".equals(password)) {//equals函数进行用户名和密码的匹配
+				if("".equals(name)&&"".equals(password)) {//equals函数进行用户名和密码的匹配
 					//JOptionPane.showMessageDialog(null,"欢迎您");///窗口显示
 					new Front();//打开新窗口
 					frame.setVisible(false);
