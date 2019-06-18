@@ -114,7 +114,29 @@ public class Xiaoshou {
 					String user = "sa";// 数据库用户名
 					String password = "123456";// 数据库密码
 					Connection connection = DriverManager.getConnection(connectDB, user, password);// 建立数据库连接，获得连接对象
-					PreparedStatement pstmt = connection.prepareStatement("{call dbo.sell_book(?,?,?,?)}");
+						Statement statement = connection.createStatement();
+						int count1 = 0;
+						int count2 = 0;
+						ResultSet rs = statement.executeQuery("SELECT * FROM Book WHERE Book_id = '" + textField_1.getText() + "'");
+						while (rs.next()) {
+							count1++;
+						}
+						 rs = statement.executeQuery("SELECT * FROM customer WHERE customer_id = '" + textField_3.getText() + "'");
+						 while (rs.next()) {
+								count2++;
+							}
+						if(count1 == 0)
+						{
+							JOptionPane.showMessageDialog(null, "没有该图书");
+							throw new Exception();
+						
+						}
+						if(count1!= 0 && count2 == 0) {
+							JOptionPane.showMessageDialog(null, "没有该顾客信息");
+							throw new Exception();
+						}
+						if(count1!=0 && count2!= 0) {
+							PreparedStatement pstmt = connection.prepareStatement("{call dbo.sell_book(?,?,?,?)}");
 					
 					pstmt.setString(1, textField.getText());
 					pstmt.setString(2, textField_1.getText());
@@ -123,8 +145,8 @@ public class Xiaoshou {
 					pstmt.execute();
 					
 					int count = 0;
-					Statement statement = connection.createStatement();
-					ResultSet rs = statement.executeQuery("SELECT * FROM Order_detail  WHERE Orderform_id =  '" + textField.getText() + "'");
+				
+					 rs = statement.executeQuery("SELECT * FROM Order_detail  WHERE Orderform_id =  '" + textField.getText() + "'");
 					
 					while (rs.next()) {
 						count++;
@@ -149,6 +171,8 @@ public class Xiaoshou {
 					
 					rs.close();
 					pstmt.close();
+						}
+						
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "程序错误");
 				}
@@ -182,10 +206,9 @@ public class Xiaoshou {
 						String password = "123456";// 数据库密码
 						Connection connection = DriverManager.getConnection(connectDB, user, password);// 建立数据库连接，获得连接对象
 						Statement statement = connection.createStatement();// 创建一个Statement对象
+						
 
-						ResultSet rs = statement
-								.executeQuery("select SUM(Pay_total) money from Order_detail where Orderform_id = '"
-										+ textField.getText() + "'");// 执行查询语句
+						ResultSet rs = statement.executeQuery("select SUM(Pay_total) money from Order_detail where Orderform_id = '"+ textField.getText() + "'");// 执行查询语句
 						String money = null;
 						while (rs.next()) {
 							money = rs.getString("money");
