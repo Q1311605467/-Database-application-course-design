@@ -1,113 +1,113 @@
-create procedure add_customer_message--æ·»åŠ ç”¨æˆ·ä¿¡æ¯å­˜å‚¨è¿‡ç¨‹
+
+
+create procedure add_customer_message--Ìí¼ÓÓÃ»§ĞÅÏ¢´æ´¢¹ı³Ì
     @Customer_id varchar(20) ,
-	@Customer_vip bit,--æ˜¯å¦ä¼šå‘˜
-	@Customer_vip_money float,--ä¼šå‘˜å¡é‡‘é¢
-	@Customer_tel varchar(20) --é¡¾å®¢è”ç³»ç”µè¯
+	@Customer_vip bit,--ÊÇ·ñ»áÔ±
+	@Customer_vip_money float,--»áÔ±¿¨½ğ¶î
+	@Customer_tel varchar(20) --¹Ë¿ÍÁªÏµµç»°
 as
 insert into Customer(Customer_id,Customer_vip,Customer_vip_money,Customer_tel)
 values (@Customer_id,@Customer_vip,@Customer_vip_money,@Customer_tel)
 
-
---------------------------------------------------------------------------------
-
-create procedure add_customer_message--æ·»åŠ ç”¨æˆ·ä¿¡æ¯å­˜å‚¨è¿‡ç¨‹
-    @Customer_id varchar(20) ,
-	@Customer_vip bit,--æ˜¯å¦ä¼šå‘˜
-	@Customer_vip_money float,--ä¼šå‘˜å¡é‡‘é¢
-	@Customer_tel varchar(20) --é¡¾å®¢è”ç³»ç”µè¯
-as
-insert into Customer(Customer_id,Customer_vip,Customer_vip_money,Customer_tel)
-values (@Customer_id,@Customer_vip,@Customer_vip_money,@Customer_tel)
-
-drop procedure add_book_message
-go
 create procedure add_book_message
-	@Book_id varchar(20), --å›¾ä¹¦å·
-	@Book_in_price float,--è¿›ä»·
-	@Book_out_price float,--å›¾ä¹¦å”®ä»·
-	@Book_name varchar(20),--ä¹¦å
-	@Supplier_name varchar(20),--ä¾›åº”å•†åå­—
+	@Book_id varchar(20), --Í¼ÊéºÅ
+	@Book_in_price float,--½ø¼Û
+	@Book_out_price float,--Í¼ÊéÊÛ¼Û
+	@Book_name varchar(20),--ÊéÃû
+	@Supplier_name varchar(20),--¹©Ó¦ÉÌÃû×Ö
 	@Book_storage_time datetime,
-	@Book_stock int--åº“å­˜
+	@Book_stock int--¿â´æ
 as
 insert into Book(Book_id,Book_in_price,Book_out_price,Book_name,Supplier_name,Book_storage_time ,Book_stock)
 values (@Book_id, @Book_in_price, @Book_out_price, @Book_name, @Supplier_name, @Book_storage_time,@Book_stock)
 
-
 ------------------------------------------------------------------------------------------------
-drop proc add_supplier_message
-go 
+
+
 create procedure add_supplier_message
-	@Supplier_id varchar(20),--ä¾›åº”å•†å·
-	@Supplier_name varchar(20),--ä¾›åº”å•†åå­—
-	@Supplier_city varchar(20),--ä¾›åº”å•†åŸå¸‚
-	@Supplier_tel varchar(20)--ä¾›åº”å•†ç”µè¯
+	@Supplier_id varchar(20),--¹©Ó¦ÉÌºÅ
+	@Supplier_name varchar(20),--¹©Ó¦ÉÌÃû×Ö
+	@Supplier_city varchar(20),--¹©Ó¦ÉÌ³ÇÊĞ
+	@Supplier_tel varchar(20)--¹©Ó¦ÉÌµç»°
 as
 insert into supplier(Supplier_id, Supplier_name, Supplier_city, Supplier_tel)
 values (@Supplier_id, @Supplier_name, @Supplier_city, @Supplier_tel)
 /*
-exec add_supplier_message 'GY10001', 'äººæ°‘é‚®ç”µå‡ºç‰ˆç¤¾', 'åŒ—äº¬','18010411467'
-exec add_supplier_message 'GY10002', 'é«˜ç­‰æ•™è‚²å‡ºç‰ˆç¤¾', 'ä¸Šæµ·','18013341500'
+exec add_supplier_message 'GY10001', 'ÈËÃñÓÊµç³ö°æÉç', '±±¾©','18010411467'
+exec add_supplier_message 'GY10002', '¸ßµÈ½ÌÓı³ö°æÉç', 'ÉÏº£','18013341500'
 */
 ----------------------------------------------------------------------------------------------
-create procedure add_Orderform--è®¢å•è¡¨
-	@Orderform_id varchar(20),--è®¢å•ç¼–å·
-	@Orderform_time datetime,--è®¢å•æ—¶é—´
-	@Customer_id varchar(20),--é¡¾å®¢ç¼–å·
-	@Supplier_id varchar(20),--ä¾›åº”å•†ç¼–å·
-	@Supplier_total int--ä¾›åº”é‡
+
+
+create procedure add_Orderform--¶©µ¥±í
+	@Orderform_id varchar(20),--¶©µ¥±àºÅ
+	@Orderform_time datetime,--¶©µ¥Ê±¼ä
+	@Customer_id varchar(20),--¹Ë¿Í±àºÅ
+	@Supplier_id varchar(20),--¹©Ó¦ÉÌ±àºÅ
+	@Supplier_total int--¹©Ó¦Á¿
 as 
 	insert into Orderform values(@Orderform_id, @Orderform_time, @Customer_id, @Supplier_id, @Supplier_total)
+	
  ----------------------------------------------------------------------------------------------
- create proc add_Order_detail--è®¢å•æ˜ç»†è¡¨
-	@Orderform_id varchar(20),--è®¢å•ç¼–å·
-	@Book_num int ,--å›¾ä¹¦æ•°é‡
-	@Book_id varchar(20),--å›¾ä¹¦å·
-	@Pay_total float--å°è®¡
+
+
+ create proc add_Order_detail--¶©µ¥Ã÷Ï¸±í
+	@Orderform_id varchar(20),--¶©µ¥±àºÅ
+	@Book_num int ,--Í¼ÊéÊıÁ¿
+	@Book_id varchar(20),--Í¼ÊéºÅ
+	@Pay_total float--Ğ¡¼Æ
 as
 	insert into Order_detail values(@Orderform_id, @Book_num, @Book_id, @Pay_total)
- 
- 
+
  ---------------------------------------------------------------------------------------
  
  
  
 ------------------------------------------------------------------------------------------------
 /*
-æ·»åŠ è¿›è´§è®°å½•
-è¿™é‡Œæ›´æ–°è®¢å•æ˜ç»†
-æ›´æ–°åº“å­˜çš„ä¹¦
+Ìí¼Ó½ø»õ¼ÇÂ¼
+ÕâÀï¸üĞÂ¶©µ¥Ã÷Ï¸
+¸üĞÂ¿â´æµÄÊé
 */
 -----------------------------------------------------------------
+drop proc Supply_ExistentBook
+GO
 
-create proc Supply_ExistentBook--ä¾›åº”å­˜åœ¨çš„ä¹¦å­˜å‚¨è¿‡ç¨‹
-    @Orderform_id varchar(20), --è®¢å•ç¼–å·
-	@Book_num int ,--å›¾ä¹¦æ•°é‡
-	@Book_id varchar(20)--å›¾ä¹¦å·
-	---Pay_total float--å°è®¡
+create proc Supply_ExistentBook--¹©Ó¦´æÔÚµÄÊé´æ´¢¹ı³Ì
+    @Orderform_id varchar(20), --¶©µ¥±àºÅ
+	@Book_num int ,--Í¼ÊéÊıÁ¿
+	@Book_id varchar(20)--Í¼ÊéºÅ
+	---Pay_total float--Ğ¡¼Æ
 as
 	begin 
-		declare @Pay_total float, @Book_price float, @time datetime,@Supplier_id varchar(20)     --å°è®¡ å›¾ä¹¦å•ä»·  
-		select @Book_price = Book_out_price  from Book where @Book_id = Book_id
-		select @Supplier_id = Orderform.Supplier_id from Book,Order_detail,Orderform where Book.Book_id = Order_detail.Book_id and Order_detail.Orderform_id = Orderform.Orderform_id --æŸ¥è¯¢ä¾›åº”å•†å·
-		set @Pay_total = @Book_price * @Book_num --è®¡ç®—æ€»é‡‘é¢
-		set @time = getdate()--è·å–å½“å‰æ—¶é—´
-		if((select Orderform_id from Orderform)=@Orderform_id)
-			begin
-				update Orderform set Supplier_total+=@Book_num where Orderform_id=@Orderform_id--æ›´æ–°è¯¥æ¡è®¢å•
-			end
-		else
-			begin
-				insert into Orderform values(@Orderform_id, @time,null,@Supplier_id,@Book_num)--åˆ›å»ºä¸€æ¡æ–°è®¢å•
-			end
-			update Book set Book_storage_time =@time where  Book_id= @Book_id--æ›´æ–°å…¥åº“æ—¶é—´
-		--select   from Book where @Book_id = Book_id
+		declare @Pay_total float, @Book_price float, @time datetime,@Supplier_id varchar(20)     --Ğ¡¼Æ Í¼Êéµ¥¼Û  
+		select @Book_price = Book_in_price  from Book where @Book_id = Book_id
+		select @Supplier_id =Supplier.Supplier_id from Book,Supplier where Book.Supplier_name=Supplier.Supplier_name and Book.Book_id=@Book_id --²éÑ¯¹©Ó¦ÉÌºÅ
+		/*Book.Book_id = Order_detail.Book_id and Order_detail.Orderform_id = Orderform.Orderform_id */
 		
-		insert into Order_detail values(@Orderform_id, @Book_num, @Book_id, @Pay_total)--æ›´æ–°è®¢å•æ˜ç»†è¡¨
-		update Book set Book_stock += @Book_num where @Book_id = Book_id  --æ›´æ–°å›¾ä¹¦åº“
-		insert into Orderform values(@Orderform_id, @time,null,@Supplier_id,@Book_num)--æ›´æ–°è®¢å•
+		set @Pay_total = @Book_price * @Book_num --¼ÆËã×Ü½ğ¶î
+		
+		--select   from Book where @Book_id = Book_id
+		set @time = getdate()--»ñÈ¡µ±Ç°Ê±¼ä
+		update Book set Book_storage_time =@time where  Book_id= @Book_id--¸üĞÂÈë¿âÊ±¼ä
+		
+		insert into Order_detail values(@Orderform_id, @Book_num, @Book_id, @Pay_total)--¸üĞÂ¶©µ¥Ã÷Ï¸±í
+		
+		update Book set Book_stock += @Book_num where Book_id =  @Book_id --¸üĞÂÍ¼Êé¿â
+		
+		if((select Orderform.Orderform_id from Orderform where Orderform_id=@Orderform_id)=@Orderform_id)
+		begin
+			update Orderform set Supplier_total+=@Book_num where Orderform_id=@Orderform_id--¸üĞÂ¸ÃÌõ¶©µ¥
+		end
+		
+		else
+		begin
+		insert into Orderform values(@Orderform_id, @time,null,@Supplier_id,@Book_num)--´´½¨Ò»ÌõĞÂ¶©µ¥
+		end
 	end
- ---æµ‹è¯•ä»£ç 
+	go
+
+ ---²âÊÔ´úÂë
  /*
  begin tran
  exec  Supply_ExistBook 'GY10001',5,'BK10001'
@@ -117,33 +117,43 @@ as
  ROLLBACK
  */ 
  
- 
- create proc Supply_NonExistentBook--ä¾›åº”ä¸å­˜åœ¨çš„ä¹¦å­˜å‚¨è¿‡ç¨‹
-	@Orderform_id varchar(20),--è®¢å•å·
-	@Book_id varchar(20),--å›¾ä¹¦å·
-	@Book_name varchar(20),--ä¹¦å
-	@Book_in_price float,--è¿›ä»·
-	@Book_out_price float,--å”®ä»·
-	@Supplier_name varchar(20),--å‡ºç‰ˆå•†
-	@Supplier_id varchar(20),--ä¾›åº”å•†å·
-	--Book_storage_time datetime,--å›¾ä¹¦å…¥åº“æ—¶é—´
-	@Book_stock int--åº“å­˜/è¿›è´§æ•°é‡
+ drop proc Supply_NonExistentBook
+ go
+ create proc Supply_NonExistentBook--¹©Ó¦²»´æÔÚµÄÊé´æ´¢¹ı³Ì
+	@Orderform_id varchar(20),--¶©µ¥ºÅ
+	@Book_id varchar(20),--Í¼ÊéºÅ
+	@Book_name varchar(20),--ÊéÃû
+	@Book_in_price float,--½ø¼Û
+	@Book_out_price float,--ÊÛ¼Û
+	@Supplier_name varchar(20),--³ö°æÉÌ
+	@Supplier_id varchar(20),--¹©Ó¦ÉÌºÅ
+	--Book_storage_time datetime,--Í¼ÊéÈë¿âÊ±¼ä
+	@Book_stock int--¿â´æ/½ø»õÊıÁ¿
 as
 	begin
-	declare @Book_storage_time datetime, @Pay_total float --å›¾ä¹¦å…¥åº“æ—¶é—´,è¿›ä»·ç»¼åˆ
+	declare @Book_storage_time datetime, @Pay_total float --Í¼ÊéÈë¿âÊ±¼ä,½ø¼Û×ÛºÏ
 	set @Book_storage_time = GETDATE()
-	
 	set @Pay_total = @Book_in_price * @Book_stock
 	exec add_book_message @Book_id, @Book_in_price, @Book_out_price, @Book_name, @Supplier_name, @Book_storage_time,@Book_stock
-	exec add_Orderform  @Orderform_id, @Book_storage_time, null, @Supplier_id, @Book_stock
 	exec add_Order_detail @Orderform_id, @Book_stock, @Book_id, @Pay_total
+	
+	if((select Orderform.Orderform_id from Orderform where Orderform_id=@Orderform_id)=@Orderform_id)
+		begin
+		update Orderform set Supplier_total+=@Book_stock where Orderform_id=@Orderform_id--¸üĞÂ¸ÃÌõ¶©µ¥
+		end
+		
+		else
+		begin
+		insert into Orderform values(@Orderform_id, @Book_storage_time,null,@Supplier_id,@Book_stock)--´´½¨Ò»ÌõĞÂ¶©µ¥
+		end
 	end
 
-
 /*----------------------------------------------------------------------------
-å‡½æ•° è¾“å…¥è¿›è´§æ—¶é—´ï¼Œè¿”å›è·ç¦»ç°åœ¨æœ‰å‡ å¤©
+º¯Êı ÊäÈë½ø»õÊ±¼ä£¬·µ»Ø¾àÀëÏÖÔÚÓĞ¼¸Ìì
 
 -------------------------*/
+drop function diff_date
+go
 create function diff_date(@date datetime)
 returns int
 begin
@@ -151,7 +161,9 @@ begin
 end
 
 ----------------------------------------
-/*ä¼šå‘˜åˆ¤æ–­å‡½æ•°   è¾“å…¥é¡¾å®¢å·ï¼Œåˆ¤æ–­æ˜¯å¦ä¸ºä¼šå‘˜*/
+/*»áÔ±ÅĞ¶Ïº¯Êı   ÊäÈë¹Ë¿ÍºÅ£¬ÅĞ¶ÏÊÇ·ñÎª»áÔ±*/
+drop function vip_judge
+
 create function vip_judge(@customer_id varchar)
 returns int
 begin
@@ -163,9 +175,11 @@ begin
 end
 --------------------------------------------------------
 
-/*åˆ¤æ–­ä¸€æœ¬ä¹¦åœ¨æ—¥æœŸé™åˆ¶ä¸‹æ˜¯å¦æ‰“æŠ˜  ç‰¹ä»·ä¹¦
-è¾“å…¥å›¾ä¹¦å·ã€é™åˆ¶å¤©æ•°   è¿”å›æ˜¯å¦æ‰“æŠ˜ï¼ˆ0/1ï¼‰
+/*ÅĞ¶ÏÒ»±¾ÊéÔÚÈÕÆÚÏŞÖÆÏÂÊÇ·ñ´òÕÛ  ÌØ¼ÛÊé
+ÊäÈëÍ¼ÊéºÅ¡¢ÏŞÖÆÌìÊı   ·µ»ØÊÇ·ñ´òÕÛ£¨0/1£©
 */
+
+drop function discount
 
 create function discount(@book_id varchar(20))
 returns int
@@ -183,54 +197,108 @@ begin
 	return 0
 end
 /*----------------------------------------------
-å–ä¹¦å­˜å‚¨è¿‡ç¨‹
+ÂôÊé´æ´¢¹ı³Ì
 ---------------------------------------*/
+
+drop proc sell_book
+go
 create proc sell_book
-	@Orderform_id varchar(20),--è®¢å•å·
-	@Book_id varchar(20),--å›¾ä¹¦å·
-	@Customer_id varchar(20),--é¡¾å®¢ç¼–å·
-	@Buy_num int	--è´­ä¹°æ•°é‡
+	@Orderform_id varchar(20),--¶©µ¥ºÅ
+	@Book_id varchar(20),--Í¼ÊéºÅ
+	@Customer_id varchar(20),--¹Ë¿Í±àºÅ
+	@Buy_num int	--¹ºÂòÊıÁ¿
 as
 	begin
-		declare @time datetime--å›¾ä¹¦çš„å…¥åº“æ—¶é—´
-		declare @flag int --æ˜¯å¦æ˜¯ç‰¹ä»·ä¹¦
-		declare @vip int --æ˜¯å¦æ˜¯ä¼šå‘˜
-		declare @vip_money float --ä¼šå‘˜å¡é‡‘é¢
-		declare @book_price float --å›¾ä¹¦çš„ä»·é’±
-		declare @money float --å®é™…äº¤æ˜“é¢ 
-		select @time = Book_storage_time, @book_price = Book_out_price from Book where @Book_id = Book_id--æŸ¥è¯¢å›¾ä¹¦çš„å…¥åº“æ—¶é—´ã€å›¾ä¹¦ä»·æ ¼
+		declare @time datetime--Í¼ÊéµÄÈë¿âÊ±¼ä
+		declare @flag int --ÊÇ·ñÊÇÌØ¼ÛÊé
+		declare @vip int --ÊÇ·ñÊÇ»áÔ±
+		declare @vip_money float --»áÔ±¿¨½ğ¶î
+		declare @book_price float --Í¼ÊéµÄ¼ÛÇ®
+		declare @money float --Êµ¼Ê½»Ò×¶î 
+		select @time = Book_storage_time, @book_price = Book_out_price from Book where @Book_id = Book_id--²éÑ¯Í¼ÊéµÄÈë¿âÊ±¼ä¡¢Í¼Êé¼Û¸ñ
 		set @flag = dbo.discount(@time)
-		if(@flag = 1 )--æ˜¯å¦ç‰¹ä»·
+		if(@flag = 1 )--ÊÇ·ñÌØ¼Û
 			begin
-			set @money = @Buy_num * @book_price* 0.7--ç‰¹ä»·ä¹¦æ‰“7æŠ˜
-				set @vip = dbo.discount(@Customer_id)
-				if(@vip = 1)--æ˜¯å¦ä¼šå‘˜
+			set @money = @Buy_num * @book_price* 0.7--ÌØ¼ÛÊé´ò7ÕÛ
+				select @vip = Customer_vip from Customer where Customer_id = @Customer_id
+				if(@vip = 1)--ÊÇ·ñ»áÔ±
 					begin
-						update Customer set Customer_vip_money += @money where Customer_id = @Customer_id--æ›´æ–°ä¼šå‘˜å¡çš„é‡‘é¢
+						update Customer set Customer_vip_money += @money where Customer_id = @Customer_id--¸üĞÂ»áÔ±¿¨µÄ½ğ¶î
 					end
 				
 			end
 		else
 			begin 
 				set @money = @Buy_num * @book_price
-				set @vip = dbo.discount(@Customer_id)
+				select @vip = Customer_vip from Customer where Customer_id = @Customer_id
 				
 				select @vip_money = Customer_vip_money from Customer where Customer_id = @Customer_id
-				if( @vip = 1 and @vip_money > 500 )
+				if( @vip = 1 )
 					begin
-						set @money = @money * 0.8 -- ä¼šå‘˜8æŠ˜
-						update Customer set Customer_vip_money = Customer_vip_money + @money where Customer_id = @Customer_id
-					end	
-					
+						if(@vip_money>500)
+						begin
+							set @money = @money * 0.8 -- »áÔ±8ÕÛ
+							update Customer set Customer_vip_money = Customer_vip_money + @money where Customer_id = @Customer_id
+						end	
+					else
+						begin
+							update Customer set Customer_vip_money = Customer_vip_money + @money where Customer_id = @Customer_id
+						end
+					end
 			end
+		
 		update Book set Book_stock-= @Buy_num where @Book_id = Book_id
-		exec add_Order_detail @Orderform_id,@Buy_num,@Book_id,@money--æ·»åŠ è®¢å•æ˜ç»†
+		exec add_Order_detail @Orderform_id,@Buy_num,@Book_id,@money--Ìí¼Ó¶©µ¥Ã÷Ï¸
+		
 		if((select Orderform.Orderform_id from Orderform where Orderform_id=@Orderform_id)=@Orderform_id)
-			begin
-				update Orderform set Supplier_total+=@Buy_num where Orderform_id=@Orderform_id--æ›´æ–°è¯¥æ¡è®¢å•
-			end
+		begin
+		update Orderform set Supplier_total+=@Buy_num where Orderform_id=@Orderform_id--¸üĞÂ¸ÃÌõ¶©µ¥
+		end
+		
 		else
-			begin
-			    insert into Orderform values(@Orderform_id, @time,@Customer_id,null,@Buy_num)--åˆ›å»ºä¸€æ¡æ–°è®¢å•
-			end
+		begin
+			insert into Orderform values(@Orderform_id, @time,@Customer_id,null,@Buy_num)--´´½¨Ò»ÌõĞÂ¶©µ¥
+		end
 	end
+------------------------------------------------------------------------------------
+/*
+´¥·¢Æ÷²¿·Ö
+
+*/
+DROP TRIGGER Order_detail_TRIGGER
+go
+
+CREATE TRIGGER Order_detail_TRIGGER
+ON Order_detail
+for INSERT, UPDATE 
+AS 
+	DECLARE @Book_id char(20)
+   
+    SELECT @Book_id=Book_id FROM inserted /*---´ÓinsertedÁÙÊ±±íÖĞ»ñÈ¡²åÈëµÄ¼ÇÂ¼ĞĞĞÅÏ¢*/
+
+if((select Book_id from Book where Book_id=@Book_id) is null)
+	begin
+	print 'Ã»ÓĞÕâ±¾Êé'
+   ROLLBACK TRANSACTION
+         RETURN
+      END
+GO
+
+
+CREATE TRIGGER Book_TRIGGER
+ON Book
+for INSERT, UPDATE 
+AS 
+	DECLARE @Book_id char(20),@Book_stock int
+   
+    SELECT @Book_id=Book_id,@Book_stock=Book_stock FROM inserted /*---´ÓinsertedÁÙÊ±±íÖĞ»ñÈ¡²åÈëµÄ¼ÇÂ¼ĞĞĞÅÏ¢*/
+   
+if(UPDATE(Book_stock))
+	begin
+	if((select Book_stock from Book where Book_id=@Book_id)<0)
+	begin
+		 ROLLBACK TRANSACTION
+         RETURN
+       END
+    end
+GO

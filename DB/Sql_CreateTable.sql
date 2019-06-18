@@ -1,13 +1,13 @@
 
---Bookstore retail management system ä¹¦åº—é›¶å”®ç®¡ç†ç³»ç»Ÿ
-create database BRMSDB  --å»ºç«‹æ•°æ®åº“
+--Bookstore retail management system ÊéµêÁãÊÛ¹ÜÀíÏµÍ³
+create database BRMSDB  --½¨Á¢Êı¾İ¿â
 on
 (
-name='BRMSDB',--åˆ›å»ºæ•°æ®æ–‡ä»¶å
-filename='d:\db\BRMSDB.mdf',--æ–‡ä»¶ååœ°å€
-size=3mb,--æ–‡ä»¶èµ·å§‹å¤§å°
-maxsize=100mb,--æ–‡ä»¶æœ€å¤§å¤§å°
-filegrowth=2mb--æ–‡ä»¶å¢é•¿é€Ÿåº¦
+name='BRMSDB',--´´½¨Êı¾İÎÄ¼şÃû
+filename='d:\db\BRMSDB.mdf',--ÎÄ¼şÃûµØÖ·
+size=3mb,--ÎÄ¼şÆğÊ¼´óĞ¡
+maxsize=100mb,--ÎÄ¼ş×î´ó´óĞ¡
+filegrowth=2mb--ÎÄ¼şÔö³¤ËÙ¶È
 )
 log on
 (
@@ -22,64 +22,78 @@ filegrowth=10%
 
 use BRMSDB
 go
-drop table supplier
+
+drop table Supplier
 go
-
-
-create table Adminuser
+create table Supplier--¹©Ó¦ÉÌ±í
 (
-public string 
-
-)
-create table Supplier--ä¾›åº”å•†è¡¨
-(
-	Supplier_id varchar(20) primary key,--ä¾›åº”å•†å·
-	Supplier_name varchar(20),--ä¾›åº”å•†åå­—
-	Supplier_city varchar(20),--ä¾›åº”å•†åŸå¸‚
-	Supplier_tel varchar(20),--ä¾›åº”å•†ç”µè¯
+	Supplier_id varchar(20) primary key not null,--¹©Ó¦ÉÌºÅ
+	Supplier_name varchar(20),--¹©Ó¦ÉÌÃû×Ö
+	Supplier_city varchar(20),--¹©Ó¦ÉÌ³ÇÊĞ
+	Supplier_tel varchar(20),--¹©Ó¦ÉÌµç»°
 	
 )
-
-create table Orderform--è®¢å•è¡¨
+drop table Orderform
+go
+create table Orderform--¶©µ¥±í
 (
-	Orderform_id varchar(20) primary key,--è®¢å•ç¼–å·
-	Orderform_time datetime,--è®¢å•æ—¶é—´
-	Customer_id varchar(20),--é¡¾å®¢ç¼–å·
-	Supplier_id varchar(20),--ä¾›åº”å•†ç¼–å·
-	Supplier_total int--ä¾›åº”é‡
+	Orderform_id varchar(20) primary key not null,--¶©µ¥±àºÅ
+	Orderform_time datetime,--¶©µ¥Ê±¼ä
+	Customer_id varchar(20),--¹Ë¿Í±àºÅ
+	Supplier_id varchar(20),--¹©Ó¦ÉÌ±àºÅ
+	Supplier_total int--¹©Ó¦Á¿
 )
-
-create table Order_detail--è®¢å•æ˜ç»†è¡¨
+drop table Order_detail
+go
+create table Order_detail--¶©µ¥Ã÷Ï¸±í
 (
-	Orderform_id varchar(20),--è®¢å•ç¼–å·
-	Book_num int ,--å›¾ä¹¦æ•°é‡
-	Book_id varchar(20),--å›¾ä¹¦å·
-	Pay_total float--å°è®¡
+	Orderform_id varchar(20),--¶©µ¥±àºÅ
+	Book_num int ,--Í¼ÊéÊıÁ¿
+	Book_id varchar(20),--Í¼ÊéºÅ
+	Pay_total float--Ğ¡¼Æ
 )
 --drop table Book
 
 drop table Book
-create table Book--å›¾ä¹¦è¡¨
+go
+create table Book--Í¼Êé±í
 (
-	Book_id varchar(20) primary key,--å›¾ä¹¦å·
-	Book_in_price float,--è¿›ä»·
-	Book_out_price float,--å”®ä»·
-	Book_name varchar(20),--ä¹¦å
-	Supplier_name varchar(20),--ä¾›åº”å•†åå­—
-	Book_storage_time datetime,--å›¾ä¹¦å…¥åº“æ—¶é—´
-	Book_stock int--åº“å­˜
+	Book_id varchar(20) primary key not null,--Í¼ÊéºÅ
+	Book_in_price float,--½ø¼Û
+	Book_out_price float,--ÊÛ¼Û
+	Book_name varchar(20),--ÊéÃû
+	Supplier_name varchar(20),--¹©Ó¦ÉÌÃû×Ö
+	Book_storage_time datetime,--Í¼ÊéÈë¿âÊ±¼ä
+	Book_stock int--¿â´æ
 )
-select * from Book
-create table Pay_message--æ”¯ä»˜ä¿¡æ¯è¡¨
+drop table Pay_message
+go
+create table Pay_message--Ö§¸¶ĞÅÏ¢±í
 (
-	Orderform_id varchar(20) primary key,--è®¢å•å·
-	Pay_money float,--æ”¯ä»˜æ€»é¢
-	Pay_mode varchar(20)--æ”¯ä»˜æ–¹å¼
+	Orderform_id varchar(20) primary key not null,--¶©µ¥ºÅ
+	Pay_money float,--Ö§¸¶×Ü¶î
+	Pay_mode varchar(20)--Ö§¸¶·½Ê½
 )
-create table Customer--é¡¾å®¢è¡¨
+drop table Customer
+go
+create table Customer--¹Ë¿Í±í
 (
-	Customer_id varchar(20) primary key,--é¡¾å®¢å·
-	Customer_vip bit,--æ˜¯å¦ä¼šå‘˜
-	Customer_vip_money float,--ä¼šå‘˜å¡é‡‘é¢
-	Customer_tel varchar(20) --é¡¾å®¢è”ç³»ç”µè¯
+	Customer_id varchar(20) primary key not null,--¹Ë¿ÍºÅ
+	Customer_vip bit,--ÊÇ·ñ»áÔ±
+	Customer_vip_money float,--»áÔ±¿¨½ğ¶î
+	Customer_tel varchar(20) --¹Ë¿ÍÁªÏµµç»°
 ) 
+
+
+-------------------½¨Á¢Ë÷Òı
+create unique index  Orderform_index on Orderform(Orderform_time desc)
+
+create unique index  Supplier_index on Supplier(Supplier_id asc)
+
+create unique index  Order_detail_index on Order_detail(Orderform_id asc)
+
+create unique index  Book_index on Book(Book_id asc)
+
+create unique index Pay_message_index on Pay_message(Orderform_id asc)
+
+create unique index  Customer_index on Customer(Customer_id asc)
