@@ -1,4 +1,4 @@
-package One;
+package Frame;
 
 import java.awt.EventQueue;
 
@@ -59,7 +59,6 @@ public class Gengxin {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setTitle("\u4F1A\u5458\u6CE8\u518C");//表名：会员注册
-		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		frame.setBounds(100, 100, 706, 509);//创建会员窗口
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -100,7 +99,7 @@ public class Gengxin {
 				try {
 					Class.forName(jdbcDriver);// 加载数据库驱动
 					String user = "sa";// 数据库用户名
-					String password = "zxc134679852";// 数据库密码
+					String password = "123456";// 数据库密码
 					Connection connection = DriverManager.getConnection(connectDB, user, password);// 建立数据库连接，获得连接对象
 
 					Statement statement = connection.createStatement();// 创建一个Statement对象
@@ -111,11 +110,11 @@ public class Gengxin {
 					while (rs.next()) {
 						count++;//记录该顾客的订单总次数
 					}
-					if(count>=6)//如果该顾客的订单总次数大于6 则可以升级成会员
+					if(count>=4)//如果该顾客的订单总次数大于6 则可以升级成会员
 					{
 						statement.executeUpdate("update Customer set Customer_vip= 1 where Customer_id = '" + textField.getText() + "'");// 执行升级语句
 						
-						JOptionPane.showMessageDialog(null,"注册成功");
+						JOptionPane.showMessageDialog(null,"升级成功");
 					}
 					else
 					{
@@ -132,5 +131,21 @@ public class Gengxin {
 		btnNewButton.setFont(new Font("宋体", Font.PLAIN, 27));
 		btnNewButton.setBounds(414, 100, 98, 38);
 		frame.getContentPane().add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("\u8FD4\u56DE");//返回按钮
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new Front();
+				frame.setVisible(false);
+			}
+		});
+		btnNewButton_1.setFont(new Font("宋体", Font.PLAIN, 29));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_1.setBounds(279, 314, 146, 50);
+		frame.getContentPane().add(btnNewButton_1);
 	}
 }
