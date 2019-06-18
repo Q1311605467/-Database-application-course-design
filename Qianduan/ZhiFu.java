@@ -1,5 +1,4 @@
-package keshe;
-
+package Frame;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
@@ -73,9 +72,11 @@ public class ZhiFu extends JDialog {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						try {
-							c();
-							setVisible(false);
-							JOptionPane.showMessageDialog(null, "支付成功！");
+							if (c() == 0) {
+								setVisible(false);
+								JOptionPane.showMessageDialog(null, "支付成功！");
+							} else
+								JOptionPane.showMessageDialog(null, "订单无效，请先添加订单！");
 						} catch (Exception e1) {
 							JOptionPane.showMessageDialog(null, "支付失败！");
 						}
@@ -116,11 +117,11 @@ public class ZhiFu extends JDialog {
 		this.money = money;
 	}
 
-	public void c() {
+	public int c() {
 		// String s = "insert into Pay_message values ('" + textField.getText()
 		// + "',"+money+",'" + a.comboBox.getSelectedItem() + "')";
-		s = "insert into Pay_message values ('" + ding + "'," + money + ",'" + comboBox.getSelectedItem() + "')";
-		System.out.println(s);
+		int count = 0;
+	
 		String jdbcDriver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 		String connectDB = "jdbc:sqlserver://127.0.0.1:1433;DatabaseName=BRMSDB";
 		try {
@@ -129,12 +130,27 @@ public class ZhiFu extends JDialog {
 			String password = "123456";// 数据库密码
 			Connection connection = DriverManager.getConnection(connectDB, user, password);// 建立数据库连接，获得连接对象
 			Statement statement = connection.createStatement();// 创建一个Statement对象
+
+			s = "select * from Order_detail where Orderform_id = '" + ding + "'";
 			ResultSet rs = statement.executeQuery(s);
+			while (rs.next()) {
+				count++;
+			}
+			if (count > 0) {
+				s = "insert into Pay_message values ('" + ding + "'," + money + ",'" + comboBox.getSelectedItem()
+						+ "')";
+				rs = statement.executeQuery(s);
+			}
+			else
+				return 1;
+
+			// return 0;
 
 			// while(rs.next()) {
 			// System.out.println(rs);
 			// }
 		} catch (Exception e) {
 		}
+		return 0;
 	}
 }
