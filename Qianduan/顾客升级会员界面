@@ -35,6 +35,7 @@ import java.sql.ResultSet;
 
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import java.awt.SystemColor;
 public class Gengxin {
 
 	private JFrame frame;
@@ -110,7 +111,7 @@ public class Gengxin {
 					while (rs.next()) {
 						count++;//记录该顾客的订单总次数
 					}
-					if(count>=4)//如果该顾客的订单总次数大于6 则可以升级成会员
+					if(count>=5)//如果该顾客的订单总次数大于5则可以升级成会员
 					{
 						statement.executeUpdate("update Customer set Customer_vip= 1 where Customer_id = '" + textField.getText() + "'");// 执行升级语句
 						
@@ -145,7 +146,15 @@ public class Gengxin {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_1.setBounds(279, 314, 146, 50);
+		btnNewButton_1.setBounds(255, 358, 146, 50);
 		frame.getContentPane().add(btnNewButton_1);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBackground(SystemColor.control);
+		textArea.setFont(new Font("Monospaced", Font.PLAIN, 25));
+		textArea.setEditable(false);
+		textArea.setText("  \u987E\u5BA2\u5347\u7EA7\u6210\u4F1A\u5458\u7684\u6761\u4EF6\uFF1A\r\n\u5728\u672C\u5E97\u8D2D\u4E70\u4E66\u7C4D\u6B21\u6570\u8FBE\u52305\u6B21");
+		textArea.setBounds(149, 215, 344, 91);
+		frame.getContentPane().add(textArea);
 	}
 }
