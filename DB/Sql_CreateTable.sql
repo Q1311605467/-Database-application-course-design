@@ -53,7 +53,7 @@ create table Order_detail--订单明细表
 	Pay_total float--小计
 )
 --drop table Book
-
+select * from Supplier
 drop table Book
 go
 create table Book--图书表
@@ -64,8 +64,10 @@ create table Book--图书表
 	Book_name varchar(20),--书名
 	Supplier_name varchar(20),--供应商名字
 	Book_storage_time datetime,--图书入库时间
-	Book_stock int--库存
+	Book_stock int,--库存
+	Book_kind varchar(20)--图书类别
 )
+
 drop table Pay_message
 go
 create table Pay_message--支付信息表

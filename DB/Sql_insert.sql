@@ -1,5 +1,6 @@
 
-
+drop procedure add_customer_message
+go
 create procedure add_customer_message--添加用户信息存储过程
     @Customer_id varchar(20) ,
 	@Customer_vip bit,--是否会员
@@ -9,6 +10,9 @@ as
 insert into Customer(Customer_id,Customer_vip,Customer_vip_money,Customer_tel)
 values (@Customer_id,@Customer_vip,@Customer_vip_money,@Customer_tel)
 
+select * from Customer
+drop procedure add_book_message
+go
 create procedure add_book_message
 	@Book_id varchar(20), --图书号
 	@Book_in_price float,--进价
@@ -16,14 +20,17 @@ create procedure add_book_message
 	@Book_name varchar(20),--书名
 	@Supplier_name varchar(20),--供应商名字
 	@Book_storage_time datetime,
-	@Book_stock int--库存
+	@Book_stock int,--库存
+	@Book_kind varchar(20)--图书类别（修改）
 as
-insert into Book(Book_id,Book_in_price,Book_out_price,Book_name,Supplier_name,Book_storage_time ,Book_stock)
-values (@Book_id, @Book_in_price, @Book_out_price, @Book_name, @Supplier_name, @Book_storage_time,@Book_stock)
+insert into Book(Book_id,Book_in_price,Book_out_price,Book_name,Supplier_name,Book_storage_time ,Book_stock,Book_kind)
+values (@Book_id, @Book_in_price, @Book_out_price, @Book_name, @Supplier_name, @Book_storage_time,@Book_stock,@Book_kind)
 
 ------------------------------------------------------------------------------------------------
 
-
+--添加供应商信息
+drop procedure add_supplier_message
+go
 create procedure add_supplier_message
 	@Supplier_id varchar(20),--供应商号
 	@Supplier_name varchar(20),--供应商名字
@@ -32,6 +39,7 @@ create procedure add_supplier_message
 as
 insert into supplier(Supplier_id, Supplier_name, Supplier_city, Supplier_tel)
 values (@Supplier_id, @Supplier_name, @Supplier_city, @Supplier_tel)
+--select * from Supplier
 /*
 exec add_supplier_message 'GY10001', '人民邮电出版社', '北京','18010411467'
 exec add_supplier_message 'GY10002', '高等教育出版社', '上海','18013341500'
@@ -128,13 +136,15 @@ as
 	@Supplier_name varchar(20),--出版商
 	@Supplier_id varchar(20),--供应商号
 	--Book_storage_time datetime,--图书入库时间
-	@Book_stock int--库存/进货数量
+	@Book_stock int,--库存/进货数量
+	@Book_kind varchar(20)--图书类别
+	
 as
 	begin
 	declare @Book_storage_time datetime, @Pay_total float --图书入库时间,进价综合
 	set @Book_storage_time = GETDATE()
 	set @Pay_total = @Book_in_price * @Book_stock
-	exec add_book_message @Book_id, @Book_in_price, @Book_out_price, @Book_name, @Supplier_name, @Book_storage_time,@Book_stock
+	exec add_book_message @Book_id, @Book_in_price, @Book_out_price, @Book_name, @Supplier_name, @Book_storage_time,@Book_stock,@Book_kind
 	exec add_Order_detail @Orderform_id, @Book_stock, @Book_id, @Pay_total
 	
 	if((select Orderform.Orderform_id from Orderform where Orderform_id=@Orderform_id)=@Orderform_id)
@@ -147,6 +157,32 @@ as
 		insert into Orderform values(@Orderform_id, @Book_storage_time,null,@Supplier_id,@Book_stock)--创建一条新订单
 		end
 	end
+---------------------------------------------------------------------------
+/*类别查询*/
+
+select ROW_NUMBER() OVER (ORDER BY SUM(Orderform.Supplier_total) DESC)'rowno',Book.Book_kind,SUM(Orderform.Supplier_total)'number' from Book,Orderform,Order_detail,Customer
+
+where Book.Book_id = Order_detail.Book_id and Order_detail.Orderform_id = Orderform.Orderform_id and Customer.Customer_id = Orderform.Customer_id
+
+group by Book.Book_kind
+
+
+
+---------------------
+select * from Orderform
+---------------------
+
+/*顾客消费查询*/
+
+select ROW_NUMBER() OVER (ORDER BY SUM(Pay_message.Pay_money) DESC)'rowno',Customer.Customer_id , SUM(Pay_message.Pay_money)
+from Orderform,Customer,Pay_message
+where Pay_message.Orderform_id = Orderform.Orderform_id and Customer.Customer_id = Orderform.Customer_id
+
+group by Customer.Customer_id
+
+
+---------------------------------------------------------------------------
+	
 
 /*----------------------------------------------------------------------------
 函数 输入进货时间，返回距离现在有几天
@@ -207,7 +243,21 @@ create proc sell_book
 	@Book_id varchar(20),--图书号
 	@Customer_id varchar(20),--顾客编号
 	@Buy_num int	--购买数量
-as
+as  -- 
+---测试
+sell_book 'GM10221','Bk10001','Gk101',1
+
+sell_book 'GM2','Bk10005','Gk101',4
+select * from Customer
+
+-------
+
+
+
+
+
+
+
 	begin
 		declare @time datetime--图书的入库时间
 		declare @flag int --是否是特价书
@@ -267,6 +317,7 @@ as
 */
 DROP TRIGGER Order_detail_TRIGGER
 go
+--图书库必须有当前的书，否则无法操作订单明细表
 
 CREATE TRIGGER Order_detail_TRIGGER
 ON Order_detail
@@ -285,6 +336,7 @@ if((select Book_id from Book where Book_id=@Book_id) is null)
 GO
 
 
+--图书的库存不能为负数
 CREATE TRIGGER Book_TRIGGER
 ON Book
 for INSERT, UPDATE 
@@ -292,7 +344,7 @@ AS
 	DECLARE @Book_id char(20),@Book_stock int
    
     SELECT @Book_id=Book_id,@Book_stock=Book_stock FROM inserted /*---从inserted临时表中获取插入的记录行信息*/
-   
+
 if(UPDATE(Book_stock))
 	begin
 	if((select Book_stock from Book where Book_id=@Book_id)<0)
@@ -302,3 +354,5 @@ if(UPDATE(Book_stock))
        END
     end
 GO
+
+

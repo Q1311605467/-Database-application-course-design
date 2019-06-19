@@ -1,23 +1,24 @@
-exec Supply_NonExistentBook 'JH10001', 'BK10001', '数据库开发与应用', 31.00, 33.00, '北京出版社','GY10001' ,5 
-exec Supply_NonExistentBook 'JH10002', 'BK10002', '算法与数据结构', 30.00, 44.00, '人民邮电出版社','GY10002' ,5 
-exec Supply_NonExistentBook 'JH10003', 'BK10003', '算法导论', 38.00, 41.00, '高等教育出版社','GY10003' ,5 
-exec Supply_NonExistentBook 'JH10004', 'BK10004', '算法导论', 34.00, 39.00, '清华大学出版社','GY10004' ,5 
-exec Supply_NonExistentBook 'JH10005', 'BK10005', 'java程序设计教程', 21.00, 33.00, '中国人民大学出版社','GY10005' ,5 
-exec Supply_NonExistentBook 'JH10006', 'BK10006', 'java程序设计教程', 31.00, 41.00, '科学出版社','GY10006' ,5 
-exec Supply_NonExistentBook 'JH10007', 'BK10007', '算法与数据结构', 47.00, 53.00, '北京出版社','GY10007' ,5 
-exec Supply_NonExistentBook 'JH10008', 'BK10008', '数据库开发与应用', 44.00, 46.00, '人民邮电出版社','GY10008' ,5 
-exec Supply_NonExistentBook 'JH10009', 'BK10009', '算法导论', 42.00, 49.00, '高等教育出版社','GY10009' ,5 
-exec Supply_NonExistentBook 'JH10010', 'BK10010', '数据库系统概论', 46.00, 54.00, '清华大学出版社','GY10010' ,5 
-exec Supply_NonExistentBook 'JH10011', 'BK10011', '数据库系统概论', 37.00, 43.00, '中国人民大学出版社','GY10011' ,5 
-exec Supply_NonExistentBook 'JH10012', 'BK10012', '概率论', 38.00, 47.00, '科学出版社','GY10012' ,5 
-exec Supply_NonExistentBook 'JH10013', 'BK10013', '概率论', 37.00, 41.00, '北京出版社','GY10013' ,5 
-exec Supply_NonExistentBook 'JH10014', 'BK10014', '概率论', 44.00, 52.00, '人民邮电出版社','GY10014' ,5 
-exec Supply_NonExistentBook 'JH10015', 'BK10015', '算法导论', 22.00, 25.00, '高等教育出版社','GY10015' ,5 
-exec Supply_NonExistentBook 'JH10016', 'BK10016', '概率论', 34.00, 40.00, '清华大学出版社','GY10016' ,5 
-exec Supply_NonExistentBook 'JH10017', 'BK10017', '概率论', 43.00, 56.00, '中国人民大学出版社','GY10017' ,5 
-exec Supply_NonExistentBook 'JH10018', 'BK10018', '概率论', 34.00, 41.00, '科学出版社','GY10018' ,5 
-exec Supply_NonExistentBook 'JH10019', 'BK10019', '数据库系统概论', 47.00, 51.00, '北京出版社','GY10019' ,5 
-exec Supply_NonExistentBook 'JH10020', 'BK10020', '数据库系统概论', 41.00, 45.00, '人民邮电出版社','GY10020' ,5 
+exec Supply_NonExistentBook 'JH10001', 'BK10001', '数据库开发与应用', 31.00, 33.00, '北京出版社','GY10001' ,5 ,'教材类'
+exec Supply_NonExistentBook 'JH10002', 'BK10002', '算法与数据结构', 30.00, 44.00, '人民邮电出版社','GY10002' ,5 ,'参考资料'
+exec Supply_NonExistentBook 'JH10003', 'BK10003', '算法导论', 38.00, 41.00, '高等教育出版社','GY10003' ,5 ,'参考资料'
+exec Supply_NonExistentBook 'JH10004', 'BK10004', '算法导论', 34.00, 39.00, '清华大学出版社','GY10004' ,5 ,'参考资料'
+exec Supply_NonExistentBook 'JH10005', 'BK10005', 'java程序设计教程', 21.00, 33.00, '中国人民大学出版社','GY10005' ,5 ,'java资料'
+exec Supply_NonExistentBook 'JH10006', 'BK10006', 'java程序设计教程', 31.00, 41.00, '科学出版社','GY10006' ,5 ,'java资料'
+exec Supply_NonExistentBook 'JH10007', 'BK10007', '算法与数据结构', 47.00, 53.00, '北京出版社','GY10007' ,5 ,'参考资料'
+exec Supply_NonExistentBook 'JH10008', 'BK10008', '数据库开发与应用', 44.00, 46.00, '人民邮电出版社','GY10008' ,5 ,'教材类'
+exec Supply_NonExistentBook 'JH10009', 'BK10009', '算法导论', 42.00, 49.00, '高等教育出版社','GY10009' ,5 ,'参考资料'
+exec Supply_NonExistentBook 'JH10010', 'BK10010', '数据库系统概论', 46.00, 54.00, '清华大学出版社','GY10010' ,5 ,'教材类'
+exec Supply_NonExistentBook 'JH10011', 'BK10011', '数据库系统概论', 37.00, 43.00, '中国人民大学出版社','GY10011' ,5 ,'教材类'
+exec Supply_NonExistentBook 'JH10012', 'BK10012', '概率论', 38.00, 47.00, '科学出版社','GY10012' ,5 ,'大学课本'
+exec Supply_NonExistentBook 'JH10013', 'BK10013', '概率论', 37.00, 41.00, '北京出版社','GY10013' ,5 ,'大学课本'
+exec Supply_NonExistentBook 'JH10014', 'BK10014', '概率论', 44.00, 52.00, '人民邮电出版社','GY10014' ,5 ,'大学课本'
+exec Supply_NonExistentBook 'JH10015', 'BK10015', '算法导论', 22.00, 25.00, '高等教育出版社','GY10015' ,5 ,'参考资料'
+exec Supply_NonExistentBook 'JH10016', 'BK10016', '概率论', 34.00, 40.00, '清华大学出版社','GY10016' ,5 ,'大学课本'
+exec Supply_NonExistentBook 'JH10017', 'BK10017', '概率论', 43.00, 56.00, '中国人民大学出版社','GY10017' ,5 ,'大学课本'
+exec Supply_NonExistentBook 'JH10018', 'BK10018', '概率论', 34.00, 41.00, '科学出版社','GY10018' ,5 ,'大学课本'
+exec Supply_NonExistentBook 'JH10019', 'BK10019', '数据库系统概论', 47.00, 51.00, '北京出版社','GY10019' ,5 ,'教材类'
+exec Supply_NonExistentBook 'JH10020', 'BK10020', '数据库系统概论', 41.00, 45.00, '人民邮电出版社','GY10020' ,5 ,'教材类'
+
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -63,4 +64,5 @@ exec add_customer_message 'GK10017', 0 , 0.0 , '18018699912'
 exec add_customer_message 'GK10018', 0 , 0.0 , '18056676299' 
 exec add_customer_message 'GK10019', 0 , 0.0 , '18070359894' 
 exec add_customer_message 'GK10020', 0 , 0.0 , '18087033811' 
+select * from customer
 
