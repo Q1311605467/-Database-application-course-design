@@ -53,38 +53,38 @@ public class Xiaoshou {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel label = new JLabel("\u8BA2\u5355\u53F7\uFF1A");//è®¢å•å·æ ‡ç­¾
+		JLabel label = new JLabel("\u8BA2\u5355\u53F7\uFF1A");//¶©µ¥ºÅ±êÇ©
 		label.setBounds(14, 31, 72, 18);
 		frame.getContentPane().add(label);
 		
-		textField = new JTextField();//è®¢å•å·æ–‡æœ¬æ¡†
+		textField = new JTextField();//¶©µ¥ºÅÎÄ±¾¿ò
 		textField.setBounds(76, 28, 101, 24);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		JLabel label_1 = new JLabel("\u56FE\u4E66\u53F7\uFF1A");//å›¾ä¹¦å·æ ‡ç­¾
+		JLabel label_1 = new JLabel("\u56FE\u4E66\u53F7\uFF1A");//Í¼ÊéºÅ±êÇ©
 		label_1.setBounds(14, 81, 72, 18);
 		frame.getContentPane().add(label_1);
 		
-		textField_1 = new JTextField();//å›¾ä¹¦å·æ–‡æœ¬æ¡†
+		textField_1 = new JTextField();//Í¼ÊéºÅÎÄ±¾¿ò
 		textField_1.setBounds(76, 78, 101, 24);
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 		
-		JLabel label_3 = new JLabel("\u987E\u5BA2\u53F7\uFF1A");//é¡¾å®¢å·æ ‡ç­¾
+		JLabel label_3 = new JLabel("\u987E\u5BA2\u53F7\uFF1A");//¹Ë¿ÍºÅ±êÇ©
 		label_3.setBounds(14, 175, 72, 18);
 		frame.getContentPane().add(label_3);
 		
-		textField_3 = new JTextField();//é¡¾å®¢å·æ–‡æœ¬æ¡†
+		textField_3 = new JTextField();//¹Ë¿ÍºÅÎÄ±¾¿ò
 		textField_3.setBounds(76, 172, 101, 24);
 		frame.getContentPane().add(textField_3);
 		textField_3.setColumns(10);
 		
-		JLabel label_4 = new JLabel("\u6570\u91CF\uFF1A");//æ•°é‡æ ‡ç­¾
+		JLabel label_4 = new JLabel("\u6570\u91CF\uFF1A");//ÊıÁ¿±êÇ©
 		label_4.setBounds(14, 127, 72, 18);
 		frame.getContentPane().add(label_4);
 		
-		textField_4 = new JTextField();//æ•°é‡æ–‡æœ¬æ¡†
+		textField_4 = new JTextField();//ÊıÁ¿ÎÄ±¾¿ò
 		textField_4.setBounds(76, 124, 101, 24);
 		frame.getContentPane().add(textField_4);
 		textField_4.setColumns(10);
@@ -110,10 +110,10 @@ public class Xiaoshou {
 				String connectDB = "jdbc:sqlserver://127.0.0.1:1433;DatabaseName=BRMSDB";
 
 				try {
-					Class.forName(jdbcDriver);// åŠ è½½æ•°æ®åº“é©±åŠ¨
-					String user = "sa";// æ•°æ®åº“ç”¨æˆ·å
-					String password = "123456";// æ•°æ®åº“å¯†ç 
-					Connection connection = DriverManager.getConnection(connectDB, user, password);// å»ºç«‹æ•°æ®åº“è¿æ¥ï¼Œè·å¾—è¿æ¥å¯¹è±¡
+					Class.forName(jdbcDriver);// ¼ÓÔØÊı¾İ¿âÇı¶¯
+					String user = "sa";// Êı¾İ¿âÓÃ»§Ãû
+					String password = "123456";// Êı¾İ¿âÃÜÂë
+					Connection connection = DriverManager.getConnection(connectDB, user, password);// ½¨Á¢Êı¾İ¿âÁ¬½Ó£¬»ñµÃÁ¬½Ó¶ÔÏó
 						Statement statement = connection.createStatement();
 						int count1 = 0;
 						int count2 = 0;
@@ -127,12 +127,12 @@ public class Xiaoshou {
 							}
 						if(count1 == 0)
 						{
-							JOptionPane.showMessageDialog(null, "æ²¡æœ‰è¯¥å›¾ä¹¦");
+							JOptionPane.showMessageDialog(null, "Ã»ÓĞ¸ÃÍ¼Êé");
 							throw new Exception();
 						
 						}
 						if(count1!= 0 && count2 == 0) {
-							JOptionPane.showMessageDialog(null, "æ²¡æœ‰è¯¥é¡¾å®¢ä¿¡æ¯");
+							JOptionPane.showMessageDialog(null, "Ã»ÓĞ¸Ã¹Ë¿ÍĞÅÏ¢");
 							throw new Exception();
 						}
 						if(count1!=0 && count2!= 0) {
@@ -164,17 +164,17 @@ public class Xiaoshou {
 						count++;
 
 					}
-					String[] title = { "è®¢å•å·", "æ•°é‡", "å›¾ä¹¦å·","å°è®¡" };
+					String[] title = { "¶©µ¥ºÅ", "ÊıÁ¿", "Í¼ÊéºÅ","Ğ¡¼Æ" };
 					table = new JTable(infomation, title);
 					table.setBounds(41, 122, 843, 372);
-					scrollPane.setViewportView(table);/// åŠ è¡¨æ ¼
+					scrollPane.setViewportView(table);/// ¼Ó±í¸ñ
 					
 					rs.close();
 					pstmt.close();
 						}
 						
 				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(null, "ç¨‹åºé”™è¯¯");
+					JOptionPane.showMessageDialog(null, "³ÌĞò´íÎó");
 				}
 				
 			}
@@ -201,14 +201,14 @@ public class Xiaoshou {
 					String jdbcDriver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 					String connectDB = "jdbc:sqlserver://127.0.0.1:1433;DatabaseName=BRMSDB";
 					try {
-						Class.forName(jdbcDriver);// åŠ è½½æ•°æ®åº“é©±åŠ¨
-						String user = "sa";// æ•°æ®åº“ç”¨æˆ·å
-						String password = "123456";// æ•°æ®åº“å¯†ç 
-						Connection connection = DriverManager.getConnection(connectDB, user, password);// å»ºç«‹æ•°æ®åº“è¿æ¥ï¼Œè·å¾—è¿æ¥å¯¹è±¡
-						Statement statement = connection.createStatement();// åˆ›å»ºä¸€ä¸ªStatementå¯¹è±¡
+						Class.forName(jdbcDriver);// ¼ÓÔØÊı¾İ¿âÇı¶¯
+						String user = "sa";// Êı¾İ¿âÓÃ»§Ãû
+						String password = "123456";// Êı¾İ¿âÃÜÂë
+						Connection connection = DriverManager.getConnection(connectDB, user, password);// ½¨Á¢Êı¾İ¿âÁ¬½Ó£¬»ñµÃÁ¬½Ó¶ÔÏó
+						Statement statement = connection.createStatement();// ´´½¨Ò»¸öStatement¶ÔÏó
 						
 
-						ResultSet rs = statement.executeQuery("select SUM(Pay_total) money from Order_detail where Orderform_id = '"+ textField.getText() + "'");// æ‰§è¡ŒæŸ¥è¯¢è¯­å¥
+						ResultSet rs = statement.executeQuery("select SUM(Pay_total) money from Order_detail where Orderform_id = '"+ textField.getText() + "'");// Ö´ĞĞ²éÑ¯Óï¾ä
 						String money = null;
 						while (rs.next()) {
 							money = rs.getString("money");
@@ -218,16 +218,16 @@ public class Xiaoshou {
 						// System.out.println(money);
 
 						ZhiFu a = new ZhiFu();
-						a.label_1.setText("è®¢å•å·ï¼š" + textField.getText());
-						a.label_2.setText("æ”¯ä»˜æ€»é¢ï¼š" + money + "å…ƒ");
+						a.label_1.setText("¶©µ¥ºÅ£º" + textField.getText());
+						a.label_2.setText("Ö§¸¶×Ü¶î£º" + money + "Ôª");
 						a.set(textField.getText(), money);
 
 					} catch (Exception e1) {
-						JOptionPane.showMessageDialog(null, "æ”¯ä»˜å¤±è´¥ï¼");
+						JOptionPane.showMessageDialog(null, "Ö§¸¶Ê§°Ü£¡");
 					}
 				} 
 				else {
-					JOptionPane.showMessageDialog(null, "è®¢å•å·ä¸èƒ½ä¸ºç©ºï¼");
+					JOptionPane.showMessageDialog(null, "¶©µ¥ºÅ²»ÄÜÎª¿Õ£¡");
 				}
 			}
 		});

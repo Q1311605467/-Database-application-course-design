@@ -82,31 +82,31 @@ public class Login  {
 			public void actionPerformed(ActionEvent arg0) {
 				String name = textField.getText();
 				String password = passwordField.getText();
-				if("".equals(name)&&"".equals(password)) {//equalså‡½æ•°è¿›è¡Œç”¨æˆ·åå’Œå¯†ç çš„åŒ¹é…
-					//JOptionPane.showMessageDialog(null,"æ¬¢è¿æ‚¨");///çª—å£æ˜¾ç¤º
-					new Front();//æ‰“å¼€æ–°çª—å£
+				if("".equals(name)&&"".equals(password)) {//equalsº¯Êı½øĞĞÓÃ»§ÃûºÍÃÜÂëµÄÆ¥Åä
+					//JOptionPane.showMessageDialog(null,"»¶Ó­Äú");///´°¿ÚÏÔÊ¾
+					new Front();//´ò¿ªĞÂ´°¿Ú
 					frame.setVisible(false);
 					
 				}else {
-					JOptionPane.showMessageDialog(null, "é”™è¯¯çš„ç”¨æˆ·åå’Œå¯†ç ");
+					JOptionPane.showMessageDialog(null, "´íÎóµÄÓÃ»§ÃûºÍÃÜÂë");
 				}
 			}
 		});
 		button_1.setBounds(240, 169, 113, 51);
 		frame.getContentPane().add(button_1);
 		
-		textField = new JTextField();///ç®¡ç†å‘˜
+		textField = new JTextField();///¹ÜÀíÔ±
 		textField.setBounds(172, 55, 181, 24);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		passwordField = new JPasswordField();//å¯†ç 
+		passwordField = new JPasswordField();//ÃÜÂë
 		passwordField.setBounds(172, 102, 181, 24);
-		passwordField.setEchoChar('*');///å°†å¯†ç è½¬åŒ–ä¸º*
+		passwordField.setEchoChar('*');///½«ÃÜÂë×ª»¯Îª*
 		frame.getContentPane().add(passwordField);
 		
 		JLabel label_2 = new JLabel("\u767B\u5F55");
-		label_2.setFont(new Font("å®‹ä½“", Font.BOLD, 20));
+		label_2.setFont(new Font("ËÎÌå", Font.BOLD, 20));
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
 		label_2.setBounds(151, 13, 126, 29);
 		frame.getContentPane().add(label_2);

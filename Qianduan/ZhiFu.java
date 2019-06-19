@@ -74,11 +74,11 @@ public class ZhiFu extends JDialog {
 						try {
 							if (c() == 0) {
 								setVisible(false);
-								JOptionPane.showMessageDialog(null, "æ”¯ä»˜æˆåŠŸï¼");
+								JOptionPane.showMessageDialog(null, "Ö§¸¶³É¹¦£¡");
 							} else
-								JOptionPane.showMessageDialog(null, "è®¢å•æ— æ•ˆï¼Œè¯·å…ˆæ·»åŠ è®¢å•ï¼");
+								JOptionPane.showMessageDialog(null, "¶©µ¥ÎŞĞ§£¬ÇëÏÈÌí¼Ó¶©µ¥£¡");
 						} catch (Exception e1) {
-							JOptionPane.showMessageDialog(null, "æ”¯ä»˜å¤±è´¥ï¼");
+							JOptionPane.showMessageDialog(null, "Ö§¸¶Ê§°Ü£¡");
 						}
 					}
 				});
@@ -104,9 +104,9 @@ public class ZhiFu extends JDialog {
 			contentPanel.add(label);
 		}
 
-		comboBox.addItem("æ”¯ä»˜å®");
-		comboBox.addItem("é“¶è”å¡");
-		comboBox.addItem("ç°é‡‘");
+		comboBox.addItem("Ö§¸¶±¦");
+		comboBox.addItem("ÒøÁª¿¨");
+		comboBox.addItem("ÏÖ½ğ");
 		comboBox.setBounds(150, 126, 105, 24);
 		contentPanel.add(comboBox);
 
@@ -125,11 +125,11 @@ public class ZhiFu extends JDialog {
 		String jdbcDriver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 		String connectDB = "jdbc:sqlserver://127.0.0.1:1433;DatabaseName=BRMSDB";
 		try {
-			Class.forName(jdbcDriver);// åŠ è½½æ•°æ®åº“é©±åŠ¨
-			String user = "sa";// æ•°æ®åº“ç”¨æˆ·å
-			String password = "123456";// æ•°æ®åº“å¯†ç 
-			Connection connection = DriverManager.getConnection(connectDB, user, password);// å»ºç«‹æ•°æ®åº“è¿æ¥ï¼Œè·å¾—è¿æ¥å¯¹è±¡
-			Statement statement = connection.createStatement();// åˆ›å»ºä¸€ä¸ªStatementå¯¹è±¡
+			Class.forName(jdbcDriver);// ¼ÓÔØÊı¾İ¿âÇı¶¯
+			String user = "sa";// Êı¾İ¿âÓÃ»§Ãû
+			String password = "123456";// Êı¾İ¿âÃÜÂë
+			Connection connection = DriverManager.getConnection(connectDB, user, password);// ½¨Á¢Êı¾İ¿âÁ¬½Ó£¬»ñµÃÁ¬½Ó¶ÔÏó
+			Statement statement = connection.createStatement();// ´´½¨Ò»¸öStatement¶ÔÏó
 
 			s = "select * from Order_detail where Orderform_id = '" + ding + "'";
 			ResultSet rs = statement.executeQuery(s);
